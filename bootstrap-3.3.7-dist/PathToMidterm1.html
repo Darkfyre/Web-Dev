@@ -3,6 +3,34 @@
 <head>
 <title>Module 5</title>
 <link rel=stylesheet type=text/css href=css/bootstrap.css>
+<script type=“text/javascript” src=“js”></script>
+<script type=“text/javascript” src=“jquery-validation-1.15.1”></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("form").validate({
+rules:{
+name:{
+required:true;
+}
+email:{
+required:true;
+}
+checkbox:{
+required:true;
+}
+comment:{
+required:true;
+}
+},
+messages:{
+name:"Please enter your name",
+email:”Please enter your email”,
+checkbox:”Please fill in a checkbox”,
+comment:”Please leave some feedback”,
+}
+</script>
+<script type=“text/javascript” src=“countdown/assets/css”></script>
+<script type=“text/javascript” src=“countdown/assets/js”></script>
 </head>
 <body>
 <div class=container>
@@ -33,6 +61,85 @@
 </div>
 </div>
 </div>
+<div id=“countdown” class="countdownHolder">
+	<span class="countDays">
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+	</span>
+
+	<span class="countDiv countDiv0"></span>
+
+	<span class="countHours">
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+	</span>
+
+	<span class="countDiv countDiv1"></span>
+
+	<span class="countMinutes">
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+	</span>
+
+	<span class="countDiv countDiv2"></span>
+
+	<span class="countSeconds">
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+		<span class="position">
+			<span class="digit static"></span>
+		</span>
+	</span>
+
+	<span class="countDiv countDiv3"></span>
+</div>
+$(function(){
+
+	var note = $('#note'),
+		ts = new Date(2016, 10, 15),
+		newYear = true;
+
+	if((new Date()) > ts){
+		ts = (new Date()).getTime() + 10*24*60*60*1000;
+		newYear = false;
+	}
+
+	$('#countdown').countdown({
+		timestamp	: ts,
+		callback	: function(days, hours, minutes, seconds){
+
+			var message = "";
+
+			message += days + " day" + ( days==1 ? '':'s' ) + ", ";
+			message += hours + " hour" + ( hours==1 ? '':'s' ) + ", ";
+			message += minutes + " minute" + ( minutes==1 ? '':'s' ) + " and ";
+			message += seconds + " second" + ( seconds==1 ? '':'s' ) + " <br />";
+
+			if(newYear){
+				message += "left until the next campaign!”;
+			}
+			else {
+				message += "left to octber 15th!”;
+			}
+
+			note.html(message);
+		}
+	});
+
+});
 <img src=CurseK4.jpg alt=The Curse of K4>
 <h2>A Little About The Game</h2>
 <p>Urealms is more than simple entertainment, it is about letting one’s mind wander to the edge of the world and beyond, it is about amazing adventures and the first encounter curse, it is about creating legendary heroes and watching them fall. Urealms is roleplaying, tucked into a nutshell, and made to grow into a forest of stories. Urealms shows us not only who we want to be, but who we are as people.</p>
